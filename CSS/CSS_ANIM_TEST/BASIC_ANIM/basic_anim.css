@@ -1,0 +1,200 @@
+/*
+CSS animáció tulajdonságok:
+
+Kezdésnek nézzük meg, hogy milyen animáció tulajdonságok léteznek CSS-ben:
+
+@keyframes (Ezzel az annotációval jelöljük, hogy egy animáció fog következni.)
+animation-name (El kell nevezni az animációt, így hivatkozhatunk rá.)
+animation-duration (Az animáció hossza másodpercben megadva.)
+animation-delay (Itt adhatjuk meg másodpercben, hogy mennyivel szeretnénk késleltetni az animáció elkezdését.)
+animation-iteration-count (Az animáció ismétlődésének száma.)
+animation-direction (Az animáció lejátszásának módját adhatjuk meg.)
+animation-timing-function (Az animáció időtartamát oszthatjuk be.)
+animation-fill-mode (Meghatározhatjuk, hogy mi történjen akkor, amikor éppen nem fut az animáció.)
+animation-play-state (Itt adhatjuk meg, hogy az animáció fusson vagy sem.)
+animation (A fentebb említett tulajdonságokat megadhatjuk egy tulajdonságként is rövidítve.)
+
+https://webiskola.hu/css-ismeretek/css-animacio-animation-keszitese/
+*/
+
+
+/* 1. Alap-animáció példa: 
+   sárga háttérszínből, zöld háttérszínbe átváltozó, 5 mp-es időtartalmú animáció, 
+   végtelenítve megismételt animáció, mindig előről kezdi sárga színből zöld, majd megint
+   
+   animation-iteration-count: Adott animáció hányszor játszódjon le. Azaz az ismétlődések számát tudjuk meghatározni.
+   infinite: Ebben az esetben végtelenszer fog ismétlődni a CSS animáció.
+*/
+
+@keyframes alap-animacio1 {
+    from {
+      background-color: yellow;
+         }
+    to {
+      background-color: green;       
+       }
+ }
+
+ div.anim-div-1 {
+    animation-name: alap-animacio1;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+  }
+
+/* 2. Alap-animáció példa: 
+   megfordítottuk az animáció irányát most zöld háttérszínből, sárga háttérszínbe átváltozó, 5 mp-es időtartalmú animáció, 
+   végtelenítve ismételt animáció, majd mindig előről kezdi zöld színből sárgába, majd megint. (az alap @keyframes animáció viszont ugyanaz.)
+   
+   animation-direction: Lejátszás irányát határozhatjuk meg.
+    normal: (ilyenkor úgy játssza le az animációt, ahogy meghatároztuk),
+    reverse: (ebben az esetben visszafele játssza le az animációt),
+    alternate: (ebben az esetben először rendesen, majd fordítva játssza le az animációt),
+    alternate-reverse: (ilyenkor először fordítva, majd rendesen játssza le az animációt)
+   */
+
+ div.anim-div-2 {
+    animation-name: alap-animacio1;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: reverse;  
+  }
+
+/* 3. Alap-animáció példa: 
+  (sárga háttérszínből, zöld háttérszínbe átváltozó, 5 mp-es időtartalmú animáció, 
+   végtelenítve megismételt animáció, mindig előről kezdi sárga színből zöld, majd megint. (az alap @keyframes animáció ugyanaz.))
+  
+  animation-timing-function: megfogalmazhatjuk, hogy az elején gyorsabban fusson, míg a végén lassabban stb.
+   ease: (lassan kezdődik, gyorsan folytatódik, majd a végére megint lelassul),
+   linear: (egyenletes sebességet biztosít az egész animáció számára),
+   ease-in: (lassú kezdés),
+   ease-out: (lassú befejezés),
+   ease-in-out: (lassú kezdés és befejezés),
+   cubic-bezier(x,x,x,x): (saját sebesség görbét határozhatunk meg)
+  */
+
+ div.anim-div-3 {
+    animation-name: alap-animacio1;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: reverse;
+    animation-timing-function: ease-out;
+  }
+  
+/* 4. Alap-animáció példa: 
+  (sárga háttérszínből, zöld háttérszínbe átváltozó, 5 mp-es időtartalmú animáció, 
+   végtelenítve megismételt animáció, mindig előről kezdi sárga színből zöld, majd megint. (az alap @keyframes animáció ugyanaz.))
+  
+  animation-fill-mode: segítségével azt állíthatjuk be, hogy az animáció futása előtt vagy futása után mi történjen. Ezeket az értékeket veheti fel.
+   none: (Ebben az esetben nem történik semmi.),
+   forwards: (Az utolsó értéket tartja meg.),
+   backwards: (Az első értéket tartja meg.),
+   both: (Mindkét értéket megtartja.)
+  úgy kell értelmezni, hogy: ha az van beállítva, hogy a háttérszín pirosból megy kékbe, és az animation-fill-mode értékének a forwards-ot adjuk, akkor a kék értéket fogja megjeleníteni, akkor amikor éppen nem fut az animáció.
+  */
+
+  div.anim-div-4 {
+    animation-name: alap-animacio1;
+    animation-duration: 20s;
+    animation-fill-mode:forwards;
+  }
+
+/* animation-play-state használata: Ezzel azt tudjuk beállítani, hogy az animáción fusson-e vagy sem. Felvehető értékek:
+    paused (nem fut),
+    running (fut),
+    initial (alapértelmezett),
+    inherit (örökli, hogy fut-e vagy sem)
+
+    Példa:
+         div {
+                animation-name: animacio;
+                animation-duration: 20s;
+                animation-play-state:paused; 
+             }
+*/
+
+/* 5. Alap-animáció példa: 
+  (sárga háttérszínből, zöld háttérszínbe átváltozó, 5 mp-es időtartalmú animáció, 
+   végtelenítve megismételt animáció, mindig előről kezdi sárga színből zöld, majd megint. (az alap @keyframes animáció ugyanaz.))
+  
+  animation használata: Az animation használatával ezt a hat CSS animáció tulajdonságot tudjuk lerövidítve, egyetlenegy sorban megadni:
+   animation-name: (animáció név),
+   animation-duration: (animáció idő),
+   animation-timing-function: (animáció futási görbe),
+   animation-delay: (animáció késleltetés),
+   animation-iteration-count: (ismétlések száma),
+   animation-direction: (lejátszási irány)
+  */
+
+  div.anim-div-5 {
+    animation: alap-animacio1 5s linear 0s infinite normal;
+  }
+
+ /* 6. Alap-animáció példa:
+    Az egérkurzor a div elemre való rárakásakor, sárga háttérszínből, zöld háttérszínbe átváltozó és közben a méretét folyamatosan növelő, 5 mp-es időtartalmú animáció, 
+    ahányszor fölé visszuk az egérkurzort, annyiszor elkezdi a színváltoztatást, és az elem méretének növelést. (itt kicsit módosul a @keyframes is a méret növelése miatt!)
+   
+    Animáció egér ráhúzásra: 
+    A példában most nem csak egy szimpla színváltoztatást fogok megmutatni, hanem egy méretváltoztatást is.
+    Ehhez a :hover CSS peszeudó selector-t fogjuk felhasználni.
+ */
+
+ @keyframes alap-animacio2 {
+    from {
+      background-color: yellow;
+      width: 100px;
+      height: 100px;
+         }
+    to {
+      background-color: green;       
+      width: 300px;
+      height: 300px;
+       }
+ }
+
+ div.anim-div-6 {
+    background-color: yellow;
+  }
+  
+  div.anim-div-6:hover {
+    animation: alap-animacio2 5s linear 0s infinite alternate;
+  }
+
+
+
+
+.anim-div-1 {
+    width: 100px;
+    height: 100px;
+    background-color: yellow;
+    display: block;
+}
+
+.anim-div-2 {
+    width: 100px;
+    height: 100px;
+    display: block;
+}
+
+.anim-div-3 {
+    width: 100px;
+    height: 100px;
+    display: block;
+}
+
+.anim-div-4 {
+    width: 100px;
+    height: 100px;
+    display: block;
+}
+
+.anim-div-5 {
+    width: 100px;
+    height: 100px;
+    display: block;
+}
+
+.anim-div-6 {
+    width: 100px;
+    height: 100px;
+    display: block;
+}
